@@ -118,3 +118,38 @@ function ensure_file_line($name, array $params) {
 		}
 	}
 }
+
+function ensure_directory($name, array $params) {
+
+	$defaults = [
+		"ensure"    => null,
+		"path"      => null,
+		"recursive" => false,
+		"mode"      => null,
+	];
+
+	$params = array_merge($defaults, $params);
+	
+	$directoryExists = is_dir($params["path"]);
+
+	if(!$directoryExists && $params["ensure"] === "absent") {
+		return NO_CHANGE;
+	}
+
+	if($directoryExists && $params["ensure"] === "absent") {
+		rmdir($params["path"]);
+		return CHANGE;
+	}
+
+	if(!$directoryExists && $params["ensure"] === "present") {
+		mkdir($params["path"], $params["mode"], $params["recursive"]);
+		return CHANGE;
+	}
+
+	if($directoryExists && $params["ensure"] === "present") {
+		return NO_CHANGE;
+	}
+
+	return ERROR;
+}
+}

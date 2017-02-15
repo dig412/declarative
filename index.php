@@ -152,4 +152,17 @@ function ensure_directory($name, array $params) {
 
 	return ERROR;
 }
+
+function template($templateFile, $variables = []) {
+	if (! file_exists($templateFile)) {
+		throw new \Exception('Could not find the template file: ' . $templateFile);
+	}
+
+	extract($variables);
+	ob_start();
+	include $templateFile;
+	$render = ob_get_contents();
+	ob_end_clean();
+
+	return $render;
 }

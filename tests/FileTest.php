@@ -1,15 +1,17 @@
 <?php
 
-include "index.php";
+include_once "index.php";
 
 class FileTest extends PHPUnit_Framework_TestCase
 {
+	private $templatePath;
 	private $existingFilePath;
 	private $nonExistingFilePath;
 	private $contents;
 
 	function setUp()
 	{
+		$this->templatePath        = __DIR__ . "/template.phtml";
 		$this->existingFilePath    = __DIR__ . "/exists.txt";
 		$this->nonExistingFilePath = __DIR__ . "/nonexistant.txt";
 		$this->contents = mt_rand();
@@ -99,5 +101,17 @@ class FileTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals(NO_CHANGE, $result);
 		$this->assertEquals($this->contents, file_get_contents($this->existingFilePath));
+	}
+
+	public function testTemplate()
+	{
+		$result = ensure_file("test", [
+			"ensure"   => "present",
+			"path"     => $this->nonExistingFilePath,
+			"contents" => template($this->templatePath, ["variable" => "hello"])
+		]);
+
+		$this->assertEquals(CHANGE, $result);
+		$this->assertEquals("variable=hello", file_get_contents($this->nonExistingFilePath));
 	}
 }

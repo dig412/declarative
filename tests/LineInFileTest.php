@@ -25,7 +25,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 	public function tearDown()
 	{
 		if(file_exists($this->filePath)) {
-			// unlink($this->filePath);
+			unlink($this->filePath);
 		}
 	}
 

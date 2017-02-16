@@ -1,7 +1,5 @@
 <?php
 
-include_once "index.php";
-
 class FileTest extends PHPUnit_Framework_TestCase
 {
 	private $templatePath;
@@ -33,7 +31,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 		}
 	}
 
-	public function testAbsentisKeptAbsent()
+	public function testAbsentIsKeptAbsent()
 	{
 		$result = ensure_file("test", [
 			"ensure" => "absent",
@@ -44,7 +42,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(!file_exists($this->nonExistingFilePath));
 	}
 
-	public function testPresentisMadeAbsent()
+	public function testPresentIsMadeAbsent()
 	{
 		$result = ensure_file("test", [
 			"ensure" => "absent",
@@ -55,7 +53,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(!file_exists($this->existingFilePath));
 	}
 
-	public function testAbsentisMadePresent()
+	public function testAbsentIsMadePresent()
 	{
 		$result = ensure_file("test", [
 			"ensure" => "present",
@@ -66,7 +64,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(file_exists($this->nonExistingFilePath));
 	}
 
-	public function testPresentisKeptPresent()
+	public function testPresentIsKeptPresent()
 	{
 		$result = ensure_file("test", [
 			"ensure" => "present",
@@ -103,7 +101,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($this->contents, file_get_contents($this->existingFilePath));
 	}
 
-	public function testTemplate()
+	public function testContentsSetFromTemplate()
 	{
 		$result = ensure_file("test", [
 			"ensure"   => "present",

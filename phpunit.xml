@@ -1,21 +1,14 @@
 <phpunit
-	stopOnError="true"
-	stopOnFailure="false"
-	stopOnIncomplete="false"
-	stopOnSkipped="false"
-	convertErrorsToExceptions="true"
-	convertNoticesToExceptions="true"
-	convertWarningsToExceptions="true"
+	bootstrap="vendor/autoload.php"
 	colors="true"
 	strict="true"
 	verbose="true">
 
 	<testsuites>
 		<testsuite name="Resources">
-			<directory suffix="Test.php">tests</directory>
+			<directory suffix="Test.php">test</directory>
 		</testsuite>
 	</testsuites>
-
 
 	<filter>
 		<whitelist processUncoveredFilesFromWhitelist="false" addUncoveredFilesFromWhitelist="false">

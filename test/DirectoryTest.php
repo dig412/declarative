@@ -1,7 +1,5 @@
 <?php
 
-include_once "index.php";
-
 class DirectoryTest extends PHPUnit_Framework_TestCase
 {
 	private $existingFilePath;
@@ -30,7 +28,7 @@ class DirectoryTest extends PHPUnit_Framework_TestCase
 		}
 	}
 
-	public function testAbsentisKeptAbsent()
+	public function testAbsentIsKeptAbsent()
 	{
 		$result = ensure_directory("test", [
 			"ensure" => "absent",
@@ -41,7 +39,7 @@ class DirectoryTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(!file_exists($this->nonExistingFilePath));
 	}
 
-	public function testPresentisMadeAbsent()
+	public function testPresentIsMadeAbsent()
 	{
 		$result = ensure_directory("test", [
 			"ensure" => "absent",
@@ -52,7 +50,7 @@ class DirectoryTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(!file_exists($this->existingFilePath));
 	}
 
-	public function testAbsentisMadePresent()
+	public function testAbsentIsMadePresent()
 	{
 		$result = ensure_directory("test", [
 			"ensure" => "present",
@@ -64,7 +62,7 @@ class DirectoryTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(is_dir($this->nonExistingFilePath));
 	}
 
-	public function testPresentisKeptPresent()
+	public function testPresentIsKeptPresent()
 	{
 		$result = ensure_directory("test", [
 			"ensure" => "present",

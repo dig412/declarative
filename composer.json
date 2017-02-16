@@ -1,0 +1,16 @@
+{
+    "name": "dig412/declarative",
+    "description": "A toy example of a Puppet-like declarative tool in PHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Doug Fitzmaurice",
+            "email": "dig412@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+      "files": ["src/library.php"]
+    }
+}

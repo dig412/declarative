@@ -1,7 +1,5 @@
 <?php
 
-include_once "index.php";
-
 class LineInFileTest extends PHPUnit_Framework_TestCase
 {
 	private $existingFilePath;
@@ -35,7 +33,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 		return in_array($line. PHP_EOL, $contents);
 	}
 
-	public function testAbsentisKeptAbsent()
+	public function testAbsentIsKeptAbsent()
 	{
 		$result = ensure_file_line("test", [
 			"ensure" => "absent",
@@ -47,7 +45,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse($this->lineIsInFile("lineX"));
 	}
 
-	public function testPresentisMadeAbsent()
+	public function testPresentIsMadeAbsent()
 	{
 		$result = ensure_file_line("test", [
 			"ensure" => "absent",
@@ -59,7 +57,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse($this->lineIsInFile("line2"));
 	}
 
-	public function testAbsentisMadePresent()
+	public function testAbsentIsMadePresent()
 	{
 		$result = ensure_file_line("test", [
 			"ensure" => "present",
@@ -71,7 +69,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue($this->lineIsInFile("line9"));
 	}
 
-	public function testPresentisKeptPresent()
+	public function testPresentIsKeptPresent()
 	{
 		$result = ensure_file_line("test", [
 			"ensure" => "present",

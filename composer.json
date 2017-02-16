@@ -11,6 +11,9 @@
     ],
     "require": {},
     "autoload": {
-      "files": ["src/library.php"]
+      "files": ["src/library.php"],
+      "psr-4": {
+          "Declarative\\": "src"
+      }
     }
 }

@@ -7,10 +7,10 @@ class Resource
 	private $name;
 	private $params;
 
-	public function __construct($functionName, $name, $params)
+	public function __construct($name, $functionName, $params)
 	{
-		$this->functionName = $functionName;
 		$this->name         = $name;
+		$this->functionName = $functionName;
 		$this->params       = $params;
 	}
 

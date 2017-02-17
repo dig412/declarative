@@ -1,7 +1,7 @@
 <?php
 namespace Declarative;
 
-class Resource
+class Resource implements ExecutableResource
 {
 	private $functionName;
 	private $name;

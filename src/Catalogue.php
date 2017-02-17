@@ -20,6 +20,11 @@ class Catalogue
 	private static $instance;
 	private $resources;
 
+	public function __construct()
+	{
+		static::$instance = $this;
+	}
+
 	public static function getInstance()
 	{
 		if(static::$instance === null) {
@@ -34,7 +39,7 @@ class Catalogue
 		$name = $resource->getFullName();
 		
 		if(isset($this->resources[$name])) {
-			throw new Exception("Resource $name is already defined!");
+			throw new \Exception("Resource $name is already defined!");
 		}
 
 		$this->resources[$name] = $resource;

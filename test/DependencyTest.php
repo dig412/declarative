@@ -55,4 +55,19 @@ class DependencyTest extends PHPUnit_Framework_TestCase
 		$this->assertNotEmpty($d1->getChildren());
 		$this->assertSame($d3, $d1->getChildren()[1]);
 	}
+
+	public function testParent()
+	{
+		$r1 = new Resource("pp", "11", []);
+		$d1 = new Dependency($r1);
+		$r2 = new Resource("cc", "22", []);
+		$d2 = new Dependency($r2);
+		$d1->addChild($d2);
+		$this->assertFalse($d1->hasParent());
+		$this->assertTrue($d1->hasChildren());
+		$this->assertTrue($d2->hasParent());
+		$this->assertFalse($d2->hasChildren());
+		$this->assertSame($d1, $d2->getParent());
+	}
+
 }

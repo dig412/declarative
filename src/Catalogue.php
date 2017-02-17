@@ -44,4 +44,15 @@ class Catalogue
 
 		$this->resources[$name] = $resource;
 	}
+
+	public function compile()
+	{
+		foreach($this->resources as $name => $resource) {
+			foreach($resource->getRequired() as $required) {
+				if(!isset($this->resources[$required])) {
+					throw new \Exception("Dependency $required for resource $name could not be found");
+				}
+			}
+		}
+	}
 }

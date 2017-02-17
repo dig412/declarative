@@ -1,5 +1,7 @@
 <?php
 
+use Declarative\Types\FileSystem;
+
 class DirectoryTest extends PHPUnit_Framework_TestCase
 {
 	private $existingFilePath;
@@ -30,7 +32,7 @@ class DirectoryTest extends PHPUnit_Framework_TestCase
 
 	public function testAbsentIsKeptAbsent()
 	{
-		$result = ensure_directory("test", [
+		$result = FileSystem::ensure_directory("test", [
 			"ensure" => "absent",
 			"path"   => $this->nonExistingFilePath
 		]);
@@ -41,7 +43,7 @@ class DirectoryTest extends PHPUnit_Framework_TestCase
 
 	public function testPresentIsMadeAbsent()
 	{
-		$result = ensure_directory("test", [
+		$result = FileSystem::ensure_directory("test", [
 			"ensure" => "absent",
 			"path"   => $this->existingFilePath
 		]);
@@ -52,7 +54,7 @@ class DirectoryTest extends PHPUnit_Framework_TestCase
 
 	public function testAbsentIsMadePresent()
 	{
-		$result = ensure_directory("test", [
+		$result = FileSystem::ensure_directory("test", [
 			"ensure" => "present",
 			"path"   => $this->nonExistingFilePath
 		]);
@@ -64,7 +66,7 @@ class DirectoryTest extends PHPUnit_Framework_TestCase
 
 	public function testPresentIsKeptPresent()
 	{
-		$result = ensure_directory("test", [
+		$result = FileSystem::ensure_directory("test", [
 			"ensure" => "present",
 			"path"   => $this->existingFilePath
 		]);

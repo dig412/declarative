@@ -1,5 +1,7 @@
 <?php
 
+use Declarative\Types\FileSystem;
+
 class FileTest extends PHPUnit_Framework_TestCase
 {
 	private $templatePath;
@@ -33,7 +35,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 
 	public function testAbsentIsKeptAbsent()
 	{
-		$result = ensure_file("test", [
+		$result = FileSystem::ensure_file("test", [
 			"ensure" => "absent",
 			"path"   => $this->nonExistingFilePath
 		]);
@@ -44,7 +46,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 
 	public function testPresentIsMadeAbsent()
 	{
-		$result = ensure_file("test", [
+		$result = FileSystem::ensure_file("test", [
 			"ensure" => "absent",
 			"path"   => $this->existingFilePath
 		]);
@@ -55,7 +57,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 
 	public function testAbsentIsMadePresent()
 	{
-		$result = ensure_file("test", [
+		$result = FileSystem::ensure_file("test", [
 			"ensure" => "present",
 			"path"   => $this->nonExistingFilePath
 		]);
@@ -66,7 +68,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 
 	public function testPresentIsKeptPresent()
 	{
-		$result = ensure_file("test", [
+		$result = FileSystem::ensure_file("test", [
 			"ensure" => "present",
 			"path"   => $this->existingFilePath
 		]);
@@ -77,7 +79,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 
 	public function testContentsAreChanged()
 	{
-		$result = ensure_file("test", [
+		$result = FileSystem::ensure_file("test", [
 			"ensure"   => "present",
 			"path"     => $this->existingFilePath,
 			"contents" => $this->contents
@@ -91,7 +93,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 	{
 		file_put_contents($this->existingFilePath, $this->contents);
 
-		$result = ensure_file("test", [
+		$result = FileSystem::ensure_file("test", [
 			"ensure"   => "present",
 			"path"     => $this->existingFilePath,
 			"contents" => $this->contents
@@ -103,7 +105,7 @@ class FileTest extends PHPUnit_Framework_TestCase
 
 	public function testContentsSetFromTemplate()
 	{
-		$result = ensure_file("test", [
+		$result = FileSystem::ensure_file("test", [
 			"ensure"   => "present",
 			"path"     => $this->nonExistingFilePath,
 			"contents" => template($this->templatePath, ["variable" => "hello"])

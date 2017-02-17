@@ -1,5 +1,7 @@
 <?php
 
+use Declarative\Types\FileSystem;
+
 class LineInFileTest extends PHPUnit_Framework_TestCase
 {
 	private $existingFilePath;
@@ -35,7 +37,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 
 	public function testAbsentIsKeptAbsent()
 	{
-		$result = ensure_file_line("test", [
+		$result = FileSystem::ensure_file_line("test", [
 			"ensure" => "absent",
 			"path"   => $this->filePath,
 			"line"   => "lineX"
@@ -47,7 +49,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 
 	public function testPresentIsMadeAbsent()
 	{
-		$result = ensure_file_line("test", [
+		$result = FileSystem::ensure_file_line("test", [
 			"ensure" => "absent",
 			"path"   => $this->filePath,
 			"line"   => "line2"
@@ -59,7 +61,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 
 	public function testAbsentIsMadePresent()
 	{
-		$result = ensure_file_line("test", [
+		$result = FileSystem::ensure_file_line("test", [
 			"ensure" => "present",
 			"path"   => $this->filePath,
 			"line"   => "line9"
@@ -71,7 +73,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 
 	public function testPresentIsKeptPresent()
 	{
-		$result = ensure_file_line("test", [
+		$result = FileSystem::ensure_file_line("test", [
 			"ensure" => "present",
 			"path"   => $this->filePath,
 			"line"   => "line2"
@@ -83,7 +85,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 
 	public function testContentsAreChanged()
 	{
-		$result = ensure_file_line("test", [
+		$result = FileSystem::ensure_file_line("test", [
 			"ensure" => "present",
 			"path"   => $this->filePath,
 			"line"   => "line3=newvalue",
@@ -97,7 +99,7 @@ class LineInFileTest extends PHPUnit_Framework_TestCase
 
 	public function testRegexLineContentsAreChanged()
 	{
-		$result = ensure_file_line("test", [
+		$result = FileSystem::ensure_file_line("test", [
 			"ensure" => "present",
 			"path"   => $this->filePath,
 			"line"   => "lineX = [*testing\"quotes'!]]",

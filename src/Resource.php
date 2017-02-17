@@ -14,6 +14,15 @@ class Resource
 		$this->params       = $params;
 	}
 
+	public function getRequired()
+	{
+		if(isset($this->params["require"])) {
+			$required = $this->params["require"];
+			return is_array($required) ? $required : [$required];
+		}
+		return [];
+	}
+
 	public function getFullName()
 	{
 		$functionName = str_replace(["_","-"], " ", $this->functionName);

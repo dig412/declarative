@@ -13,6 +13,15 @@ class ResourceTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals("LineInFile['test-line']", $r->getFullName());
 	}
 
+	public function testGetRequired()
+	{
+		$r = new Resource("testfile", "file", []);
+		$this->assertEmpty($r->getRequired());
+		
+		$r = new Resource("testfile", "file", ["require" => "thing"]);
+		$this->assertEquals(["thing"], $r->getRequired());
+	}
+
 	public function testExecute()
 	{
 		function test1($name) {

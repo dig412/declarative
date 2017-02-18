@@ -9,7 +9,9 @@
             "email": "dig412@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "psr/log": "^1.0"
+    },
     "autoload": {
       "files": ["src/library.php"],
       "psr-4": {

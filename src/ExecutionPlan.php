@@ -41,8 +41,35 @@ class ExecutionPlan
 	 * Set the Logger instance that will be used to report on the progress of the execution
 	 * @param Logger $logger 
 	 */
-	public function setLogger(Logger $logger)
+	public function setLogger(\Psr\Log\LoggerInterface $logger)
 	{
 		$this->logger = $logger;
+	}
+
+	public function execute()
+	{
+		$this->executeResource($this->root);
+	}
+
+	/**
+	 * Recursive DFS implementation
+	 * @param  Dependency $dependency [description]
+	 * @return [type]                 [description]
+	 */
+	private function executeResource(Dependency $dependency)
+	{
+		$result = $dependency->getResource()->execute();
+		$name = $dependency->getResource()->getFullName();
+		if($result == CHANGE) {
+			$this->logger->info("$name - returned success");
+			foreach ($dependency->getChildren() as $child) {
+				$this->executeResource($child);
+			}
+		} else if ($result == ERROR) {
+			foreach ($dependency->getChildren() as $child) {
+				$name = $child->getResource()->getFullName();
+				$this->logger->error("$name - skipping because of failed dependency");
+			}
+		}
 	}
 }

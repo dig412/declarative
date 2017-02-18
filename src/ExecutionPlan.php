@@ -66,6 +66,7 @@ class ExecutionPlan
 				$this->executeResource($child);
 			}
 		} else if ($result == ERROR) {
+			$this->logger->error("$name - failed with error");
 			foreach ($dependency->getChildren() as $child) {
 				$name = $child->getResource()->getFullName();
 				$this->logger->error("$name - skipping because of failed dependency");

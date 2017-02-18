@@ -3,7 +3,7 @@ namespace Declarative;
 
 class RootResource implements ExecutableResource
 {
-	public function getFulllName()
+	public function getFullName()
 	{
 		return "Root[]";
 	}

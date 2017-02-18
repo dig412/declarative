@@ -12,7 +12,7 @@ class Dependency
 	private $parent;
 	private $children = [];
 
-	public function __construct(Resource $resource)
+	public function __construct(ExecutableResource $resource)
 	{
 		$this->resource = $resource;
 	}
